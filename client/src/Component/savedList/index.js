@@ -1,25 +1,28 @@
 import React, {useContext, useEffect} from "react";
 import StateContext from "../../utils/globalBookData";
+import {Link} from 'react-router-dom'
+import './savedlist.css'
 
 function SavedList() {
-    const context = useContext(StateContext)
-
-    
+    const context = useContext(StateContext)    
 
     return(
         <div>
             {console.log(context.bookData)}
             {context.bookData.map(data => {
                 return(
-                    <div>
-                    <a href={'/saved/' + data._id}>
-                        <div key={data.id}>
-                            <h3>{data.title}</h3>
-                            <p>Author: {data.author}</p>
-                            <h4>Description: <p>{data.synopsis}</p></h4>
+                    <div key={data.id} className='savedBooks'>
+                    <Link className='savedSearch' to ={'/saved/'+ data._id}>
+                        <div>
+                            <h3 className='title'>{data.title}</h3>
+                            <img src = {data.image}/>
+                            <p className='author'>Author: <strong>{data.author}</strong></p>
+                            <h4 className='desc'>Description: </h4>
+                            <p className='details'>{data.synopsis}</p>
                         </div>
-                    </a>
+                    </Link>
                     <button onClick={() => {context.deleteBook(data)}}>Delete</button>
+                    
                     </div>
                 )
             })}

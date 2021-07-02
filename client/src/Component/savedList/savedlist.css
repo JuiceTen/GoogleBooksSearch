@@ -1,0 +1,19 @@
+.savedBooks {
+    padding-top: 50px;
+}
+
+.savedSearch {
+    text-decoration: none;
+    color: black;
+}
+
+.release {
+    text-align: center;
+}
+.author {
+    text-align: center;
+}
+
+.title {
+    font-family: Arial, Helvetica, sans-serif;
+}

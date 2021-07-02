@@ -1,0 +1,19 @@
+.books {
+    padding-top: 50px;
+}
+
+
+p {
+    text-align: left;
+}
+
+.release {
+    text-align: center;
+}
+.author {
+    text-align: center;
+}
+
+.title {
+    font-family: Arial, Helvetica, sans-serif;
+}

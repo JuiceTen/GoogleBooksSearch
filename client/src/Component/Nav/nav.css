@@ -1,0 +1,12 @@
+li {
+    list-style-type: none;
+    float: left;
+}
+
+.link { 
+    text-decoration: none;
+}
+
+p {
+    margin: 10px;
+}

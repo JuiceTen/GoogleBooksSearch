@@ -15,10 +15,14 @@ const bookSchema = new Schema({
         required: true,
     }],
     synopsis: String,
+    image: {
+        type: String,
+    },
     date: {
         type: Date,
         default: Date.now
     }  
+
 })
 
 const Book = mongoose.model('Book', bookSchema);

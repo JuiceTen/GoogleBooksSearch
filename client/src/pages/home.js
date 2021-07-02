@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {Component, useState} from 'react';
 import API from '../utils/api'
 import StateContext from '../utils/globalBookData'
 import BookSearch from '../Component/searchList/index'
-
+import SearchBar from '../Component/searchBar';
+import {Redirect} from 'react-router-dom'
 
 function Home() {
     const [books, setBooks] = useState({});
@@ -22,27 +23,49 @@ function Home() {
             id: currentBook.id,
             title: currentBook.volumeInfo.title,
             author: currentBook.volumeInfo.authors,
-            synopsis: currentBook.volumeInfo.description
+            synopsis: currentBook.volumeInfo.description,
+            image: currentBook.volumeInfo.imageLinks.thumbnail
         })
         .then(res => {
             console.log(res.data)
         })
         .catch(err => console.log(err))
     }
- 
+    
+    function handleInputChange(e) {
+        const value = e.target.value;
+        setSearch(value)
+    };
 
     function handleSearch(e) {
         e.preventDefault()
         loadGoogle()
+        setSearch('')
+    }
+
+    function handleKeyPress(e) {
+        e.preventDefault()
+        if(e.key === 'Enter' || e.key === 'enter') {
+            loadGoogle()
+            setSearch('')
+        }
     }
 
     
     return(
         <div>
-            <input type = 'text' placeholder='e.g. harry potter'name='search' value={search} onChange={(e) => setSearch(e.target.value)}/>
-            <button onClick={handleSearch}>Search</button>
-            <StateContext.Provider value={{books, saveGoogleBooks}}>
-                <BookSearch />
+            <StateContext.Provider value={{books, saveGoogleBooks, handleSearch, loadGoogle, search, handleInputChange, handleKeyPress}}>
+                
+                {books.length > 0 ? 
+                    <div>
+                    <Redirect to={{
+                        pathname: '/search',
+                    }}></Redirect>
+                    <BookSearch />
+                    </div>
+                    :
+                    <div className='searchBar'><SearchBar /></div>
+                }
             </StateContext.Provider>
         </div>
         
